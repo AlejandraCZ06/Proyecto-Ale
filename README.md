@@ -1,6 +1,6 @@
 ## ALSE - Entregas de Ejercicios
 
-#### **Entrega 1**
+### **Entrega 1**
 **Practica 1**
 | Ejercicio | Descripción |
 | ----------- | ----------- |
