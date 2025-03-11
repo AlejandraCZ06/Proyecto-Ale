@@ -1,0 +1,33 @@
+cmake_minimum_required(VERSION 3.10)
+
+# Establece el nombre del proyecto
+project(GenericProject)
+
+# Configuración del estándar de C++
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+# Opciones de configuración
+option(BUILD_TESTS "Build the tests" OFF)
+option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
+
+# Directorios de inclusión
+include_directories(${CMAKE_SOURCE_DIR}/include)
+
+# Directorios de bibliotecas
+link_directories(${CMAKE_SOURCE_DIR}/lib)
+
+# Agregar subdirectorios
+add_subdirectory(src)
+
+# Construir tests si la opción está activada
+if(BUILD_TESTS)
+    enable_testing()
+    add_subdirectory(tests)
+endif()
+
+# Instalación
+install(TARGETS ${PROJECT_NAME}
+        RUNTIME DESTINATION bin
+        LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION lib/static)
