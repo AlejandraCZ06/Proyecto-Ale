@@ -1,3 +1,13 @@
+/*
+1. TWO SUM
+
+El ejercicio "Two Sum" pide encontrar dos números en un arreglo que sumen un valor objetivo dado.
+Debes devolver los índices de estos dos números. Se garantiza que hay exactamente una solución,
+y no puedes usar el mismo elemento dos veces. La respuesta puede ser en cualquier orden.
+
+Autor: Alejandra Caldeorn Zambrana
+*/
+
 #include <iostream>
 #include <vector>
 #include <unordered_map>
