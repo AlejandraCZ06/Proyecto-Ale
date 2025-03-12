@@ -13,12 +13,12 @@ public:
         // Iterar sobre el vector de números
         for (int i = 0; i < nums.size(); ++i) {
             // Calcular el complemento necesario para alcanzar el target
-            int complement = target - nums[i];
+            int complemento = target - nums[i];
             
             // Verificar si el complemento ya está en el mapa
-            if (numMap.find(complement) != numMap.end()) {
+            if (numMap.find(complemento) != numMap.end()) {
                 // Si se encuentra, devolver los índices
-                return {numMap[complement], i};
+                return {numMap[complemento], i};
             }
             
             // Si no se encuentra, agregar el número actual y su índice al mapa
@@ -50,11 +50,14 @@ int main() {
     std::cin >> target;
     
     // Llamar a la función twoSum para encontrar los índices
-    std::vector<int> result = solution.twoSum(nums, target);
+    std::vector<int> resultado = solution.twoSum(nums, target);
     
     // Mostrar el resultado
-    if (!result.empty()) {
-        std::cout << "Output: [" << result[0] << ", " << result[1] << "]" << std::endl;
+    if (!resultado.empty()) {
+        std::cout << "Resultado: [" << resultado[0] << ", " << resultado[1] << "]" << std::endl;
+        // Explicación del resultado
+        std::cout << "Explicación: Porque nums[" << resultado[0] << "] + nums[" << resultado[1] << "] == " 
+                  << target << ", devolvemos [" << resultado[0] << ", " << resultado[1] << "]." << std::endl;
     } else {
         std::cout << "No se encontró una solución." << std::endl;
     }
