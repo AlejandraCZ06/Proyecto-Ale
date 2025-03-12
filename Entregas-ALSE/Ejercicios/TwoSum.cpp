@@ -23,12 +23,27 @@ public:
 
 int main() {
     Solution solution;
-    std::vector<int> nums = {2, 7, 11, 15};
-    int target = 9;
+    int n, target;
+    
+    std::cout << "Ingrese el número de elementos: ";
+    std::cin >> n;
+    
+    std::vector<int> nums(n);
+    std::cout << "Ingrese los elementos del arreglo: ";
+    for (int i = 0; i < n; ++i) {
+        std::cin >> nums[i];
+    }
+    
+    std::cout << "Ingrese el objetivo (target): ";
+    std::cin >> target;
     
     std::vector<int> result = solution.twoSum(nums, target);
     
-    std::cout << "Output: [" << result[0] << ", " << result[1] << "]" << std::endl;
+    if (!result.empty()) {
+        std::cout << "Output: [" << result[0] << ", " << result[1] << "]" << std::endl;
+    } else {
+        std::cout << "No se encontró una solución." << std::endl;
+    }
     
     return 0;
 }
