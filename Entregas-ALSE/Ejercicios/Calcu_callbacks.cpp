@@ -23,25 +23,31 @@ typedef function<double(double, double)> Operacion;
 
 // Función para sumar dos números
 double sumar(double x, double y) {
+    // Devuelve la suma de x e y
     return x + y;
 }
 
 // Función para restar el segundo número del primero
 double restar(double x, double y) {
+    // Devuelve la resta de x menos y
     return x - y;
 }
 
 // Función para multiplicar dos números
 double multiplicar(double x, double y) {
+    // Devuelve el producto de x e y
     return x * y;
 }
 
 // Función para dividir el primer número por el segundo, con verificación de división por cero
 double dividir(double x, double y) {
+    // Verifica si el divisor es cero para evitar una división por cero
     if (y == 0) {
+        // Si el divisor es cero, muestra un mensaje de error y devuelve cero
         cerr << "Error: No se puede dividir por cero" << endl;
         return 0;
     }
+    // Si el divisor no es cero, devuelve el resultado de la división
     return x / y;
 }
 
@@ -62,9 +68,12 @@ int main() {
 
     // Verificar y ejecutar la operación
     if (operaciones.find(operador) != operaciones.end()) {
+        // Ejecuta la función correspondiente al operador ingresado
         double resultado = operaciones[operador](numero1, numero2);
+        // Muestra el resultado de la operación
         cout << "Resultado: " << resultado << endl;
     } else {
+        // Si el operador no es válido, muestra un mensaje de error
         cout << "Operador no reconocido" << endl;
     }
 
