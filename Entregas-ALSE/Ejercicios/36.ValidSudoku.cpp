@@ -2,6 +2,7 @@
 #include <vector>
 #include <unordered_set>
 #include <string>
+#include <sstream>
 using namespace std;
 
 class Solution {
@@ -33,15 +34,21 @@ public:
 int main() {
     vector<vector<char>> board(9, vector<char>(9));
     string input;
-    cout << "Ingrese el tablero de Sudoku:" << endl;
+    cout << "Ingrese el tablero de Sudoku en el formato de las imágenes:" << endl;
+    getline(cin, input);
 
-    for (int i = 0; i < 9; ++i) {
-        getline(cin, input);
-        int k = 0;
-        for (char c : input) {
-            if (c != ',' && c != '[' && c != ']') {
-                board[i][k++] = c;
-            }
+    stringstream ss(input);
+    char c;
+    int i = 0, j = 0;
+
+    while (ss >> c) {
+        if (c == '[' || c == ']' || c == ',') continue;
+        if (c == '"') continue;
+        board[i][j] = c;
+        j++;
+        if (j == 9) {
+            j = 0;
+            i++;
         }
     }
 
