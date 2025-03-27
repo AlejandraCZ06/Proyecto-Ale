@@ -17,3 +17,8 @@
 | Ejercicio | Descripción |
 | ----------- | ----------- |
 | LeetCode Ej 415 | Add Strings |
+
+**Pratica 4**
+| Ejercicio | Descripción |
+| --------- | ----------- |
+|LeetCode Ej 36 | Sudoku |
