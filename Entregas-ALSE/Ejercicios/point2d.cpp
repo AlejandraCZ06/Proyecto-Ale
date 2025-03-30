@@ -64,17 +64,24 @@ public:
 };
 
 int main() {
-    Point2d p1(3, 4);
-    Point2d p2(6, 8);
+    double x1, y1, x2, y2;
 
-    std::cout << "Distance from p1 to p2: " << p1.distanceTo(p2) << std::endl;
-    std::cout << "Distance from p1 to origin: " << p1.distanceToOrigin() << std::endl;
+    std::cout << "Ingrese las coordenadas del primer punto (x y) separe las coordenadas por un espacio: ";
+    std::cin >> x1 >> y1;
+    Point2d p1(x1, y1);
+
+    std::cout << "Ingrese las coordenadas del segundo punto (x y)separe las coordenadas por un espacio: ";
+    std::cin >> x2 >> y2;
+    Point2d p2(x2, y2);
+
+    std::cout << "Distancia de p1 a p2: " << p1.distanceTo(p2) << std::endl;
+    std::cout << "Distancia de p1 al origen: " << p1.distanceToOrigin() << std::endl;
 
     Point2d midpoint = p1.midpoint(p2);
-    std::cout << "Midpoint: (" << midpoint.getX() << ", " << midpoint.getY() << ")" << std::endl;
+    std::cout << "Punto medio: (" << midpoint.getX() << ", " << midpoint.getY() << ")" << std::endl;
 
     Point2d unit = p1.unitVector();
-    std::cout << "Unit vector of p1: (" << unit.getX() << ", " << unit.getY() << ")" << std::endl;
+    std::cout << "Vector unitario de p1: (" << unit.getX() << ", " << unit.getY() << ")" << std::endl;
 
     return 0;
 }
