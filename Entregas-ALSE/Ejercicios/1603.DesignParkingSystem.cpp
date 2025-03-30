@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
 // Clase que representa el sistema de estacionamiento
@@ -39,23 +40,31 @@ public:
 };
 
 int main() {
-    int big, medium, small;
-    cout << "Ingrese el número de espacios para coches grandes, medianos y pequeños: ";
-    cin >> big >> medium >> small;
+    vector<string> commands = {"ParkingSystem", "addCar", "addCar", "addCar", "addCar"};
+    vector<vector<int>> inputs = {{1, 1, 0}, {1}, {2}, {3}, {1}};
+    vector<string> output;
 
-    // Crear un objeto ParkingSystem con los espacios iniciales
-    ParkingSystem* parkingSystem = new ParkingSystem(big, medium, small);
+    ParkingSystem* parkingSystem = nullptr;
 
-    int carType;
-    cout << "Ingrese el tipo de coche (1: grande, 2: mediano, 3: pequeño) o 0 para salir: ";
-    while (cin >> carType && carType != 0) {
-        if (parkingSystem->addCar(carType)) {
-            cout << "Coche estacionado exitosamente." << endl;
-        } else {
-            cout << "No hay espacio disponible para este tipo de coche." << endl;
+    for (size_t i = 0; i < commands.size(); ++i) {
+        if (commands[i] == "ParkingSystem") {
+            parkingSystem = new ParkingSystem(inputs[i][0], inputs[i][1], inputs[i][2]);
+            output.push_back("null");
+        } else if (commands[i] == "addCar") {
+            bool result = parkingSystem->addCar(inputs[i][0]);
+            output.push_back(result ? "true" : "false");
         }
-        cout << "Ingrese el tipo de coche (1: grande, 2: mediano, 3: pequeño) o 0 para salir: ";
     }
+
+    // Imprimir la salida
+    cout << "[";
+    for (size_t i = 0; i < output.size(); ++i) {
+        cout << output[i];
+        if (i < output.size() - 1) {
+            cout << ",";
+        }
+    }
+    cout << "]" << endl;
 
     // Liberar la memoria del objeto ParkingSystem
     delete parkingSystem;
