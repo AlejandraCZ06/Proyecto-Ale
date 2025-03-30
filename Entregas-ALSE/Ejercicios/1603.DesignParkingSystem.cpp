@@ -43,8 +43,12 @@ public:
 
 int main() {
     string commandsInput, dataInput;
+    
+    // Solicitar al usuario que ingrese los comandos
     cout << "Ingrese los comandos: ";
     getline(cin, commandsInput);
+    
+    // Solicitar al usuario que ingrese los datos
     cout << "Ingrese los datos: ";
     getline(cin, dataInput);
 
@@ -56,7 +60,7 @@ int main() {
     string command;
     char ch;
 
-    // Leer comandos
+    // Leer comandos del input
     while (ssCommands >> ch) {
         if (ch == '"') {
             getline(ssCommands, command, '"');
@@ -64,7 +68,7 @@ int main() {
         }
     }
 
-    // Leer datos
+    // Leer datos del input
     vector<int> temp;
     int num;
     while (ssData >> ch) {
@@ -83,11 +87,14 @@ int main() {
     vector<string> output;
     ParkingSystem* parkingSystem = nullptr;
 
+    // Procesar cada comando
     for (size_t i = 0; i < commands.size(); ++i) {
         if (commands[i] == "ParkingSystem") {
+            // Inicializar el sistema de estacionamiento
             parkingSystem = new ParkingSystem(inputs[i][0], inputs[i][1], inputs[i][2]);
             output.push_back("null");
         } else if (commands[i] == "addCar") {
+            // Intentar agregar un coche y almacenar el resultado
             bool result = parkingSystem->addCar(inputs[i][0]);
             output.push_back(result ? "true" : "false");
         }
