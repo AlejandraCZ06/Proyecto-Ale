@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <string>
+#include <sstream>
 using namespace std;
 
 // Clase que representa el sistema de estacionamiento
@@ -40,10 +42,45 @@ public:
 };
 
 int main() {
-    vector<string> commands = {"ParkingSystem", "addCar", "addCar", "addCar", "addCar"};
-    vector<vector<int>> inputs = {{1, 1, 0}, {1}, {2}, {3}, {1}};
-    vector<string> output;
+    string commandsInput, dataInput;
+    cout << "Ingrese los comandos: ";
+    getline(cin, commandsInput);
+    cout << "Ingrese los datos: ";
+    getline(cin, dataInput);
 
+    // Procesar los datos de entrada
+    vector<string> commands;
+    vector<vector<int>> inputs;
+    stringstream ssCommands(commandsInput);
+    stringstream ssData(dataInput);
+    string command;
+    char ch;
+
+    // Leer comandos
+    while (ssCommands >> ch) {
+        if (ch == '"') {
+            getline(ssCommands, command, '"');
+            commands.push_back(command);
+        }
+    }
+
+    // Leer datos
+    vector<int> temp;
+    int num;
+    while (ssData >> ch) {
+        if (isdigit(ch)) {
+            ssData.putback(ch);
+            ssData >> num;
+            temp.push_back(num);
+        } else if (ch == ']') {
+            if (!temp.empty()) {
+                inputs.push_back(temp);
+                temp.clear();
+            }
+        }
+    }
+
+    vector<string> output;
     ParkingSystem* parkingSystem = nullptr;
 
     for (size_t i = 0; i < commands.size(); ++i) {
@@ -57,7 +94,7 @@ int main() {
     }
 
     // Imprimir la salida
-    cout << "[";
+    cout << "Respuesta: [";
     for (size_t i = 0; i < output.size(); ++i) {
         cout << output[i];
         if (i < output.size() - 1) {
