@@ -70,7 +70,7 @@ int main() {
     vector<vector<int>> inputs = { {}, {1, 5}, {1}, {1, 2}, {2, 6}, {1}, {1, 2}, {1} };
     
     // Resultado a devolver
-    vector<optional<vector<int>>> result;
+    vector<vector<int>> result;
     
     for (int i = 0; i < operations.size(); ++i) {
         if (operations[i] == "Twitter") {
@@ -92,15 +92,15 @@ int main() {
     
     // Imprimir los resultados en el formato esperado
     for (auto& res : result) {
-        if (res.has_value()) {
+        if (res.empty()) {
+            cout << "null";
+        } else {
             cout << "[";
-            for (int i = 0; i < res->size(); ++i) {
-                cout << res->at(i);
-                if (i < res->size() - 1) cout << ",";
+            for (int i = 0; i < res.size(); ++i) {
+                cout << res[i];
+                if (i < res.size() - 1) cout << ",";
             }
             cout << "]";
-        } else {
-            cout << "null";
         }
         cout << endl;
     }
