@@ -7,103 +7,110 @@ using namespace std;
 
 class Twitter {
 public:
-    int timeStamp;
-    unordered_map<int, vector<pair<int, int>>> tweets; // Mapa de usuario -> tweet (con timestamp)
-    unordered_map<int, unordered_set<int>> follows; // Mapa de seguidores (usuario -> usuarios que sigue)
+    int timeStamp;  // Variable para llevar el contador de tiempo (timestamp) de los tweets
+    unordered_map<int, vector<pair<int, int>>> tweets; // Mapa para almacenar los tweets (usuario -> lista de tweets)
+    unordered_map<int, unordered_set<int>> follows; // Mapa para almacenar los usuarios que sigue cada usuario (usuario -> conjunto de seguidores)
 
-    // Constructor que inicializa el contador de timestamps
+    // Constructor de la clase Twitter
     Twitter() {
-        timeStamp = 0;
+        timeStamp = 0; // Inicializa el timestamp en 0
     }
 
-    // Publica un tweet con un ID dado
+    // Función para publicar un tweet
     void postTweet(int userId, int tweetId) {
+        // Guarda el tweet junto con su timestamp (tiempo)
         tweets[userId].push_back({timeStamp++, tweetId});
     }
 
-    // Obtiene el feed de noticias de un usuario
+    // Función para obtener el feed de noticias de un usuario
     vector<int> getNewsFeed(int userId) {
-        priority_queue<pair<int, int>> feed; // Cola de prioridad para ordenar los tweets por timestamp (más reciente primero)
+        priority_queue<pair<int, int>> feed; // Cola de prioridad para almacenar los tweets (más reciente primero)
         
         // Agregar los tweets del propio usuario
         for (auto& t : tweets[userId]) {
             feed.push(t);
         }
 
-        // Agregar los tweets de los usuarios que sigue
+        // Agregar los tweets de los usuarios a los que sigue el usuario
         for (auto& followeeId : follows[userId]) {
             for (auto& t : tweets[followeeId]) {
                 feed.push(t);
             }
         }
 
-        // Recuperar los 10 tweets más recientes
+        // Obtener los 10 tweets más recientes (si existen)
         vector<int> result;
         int count = 0;
         while (!feed.empty() && count < 10) {
-            result.push_back(feed.top().second); // Agregar el tweet ID al resultado
-            feed.pop();
+            result.push_back(feed.top().second); // Agregar el ID del tweet al resultado
+            feed.pop(); // Eliminar el tweet más antiguo (de acuerdo con el orden de la cola)
             count++;
         }
 
-        return result;
+        return result; // Devolver los 10 tweets más recientes
     }
 
-    // Hace que un usuario siga a otro
+    // Función para hacer que un usuario siga a otro
     void follow(int followerId, int followeeId) {
         if (followerId == followeeId) return; // Un usuario no puede seguirse a sí mismo
-        follows[followerId].insert(followeeId);
+        follows[followerId].insert(followeeId); // El usuario sigue a otro
     }
 
-    // Hace que un usuario deje de seguir a otro
+    // Función para hacer que un usuario deje de seguir a otro
     void unfollow(int followerId, int followeeId) {
-        follows[followerId].erase(followeeId);
+        follows[followerId].erase(followeeId); // Eliminar al usuario del conjunto de seguidores
     }
 };
 
 int main() {
-    // Crear un objeto Twitter
+    // Crear un objeto de Twitter
     Twitter* twitter = new Twitter();
     
     // Definir las operaciones y su entrada
     vector<string> operations = {"Twitter","postTweet","getNewsFeed","follow","postTweet","getNewsFeed","unfollow","getNewsFeed"};
     vector<vector<int>> inputs = { {}, {1, 5}, {1}, {1, 2}, {2, 6}, {1}, {1, 2}, {1} };
     
-    // Resultado a devolver
+    // Resultado para almacenar las salidas de las operaciones
     vector<vector<int>> result;
     
+    // Iterar sobre las operaciones
     for (int i = 0; i < operations.size(); ++i) {
         if (operations[i] == "Twitter") {
+            // Crear un nuevo objeto Twitter
             twitter = new Twitter();
-            result.push_back({});
+            result.push_back({}); // No hay salida para esta operación, se agrega un vector vacío
         } else if (operations[i] == "postTweet") {
+            // Publicar un tweet con el ID y el tweet proporcionados
             twitter->postTweet(inputs[i][0], inputs[i][1]);
-            result.push_back({});
+            result.push_back({}); // No hay salida para esta operación, se agrega un vector vacío
         } else if (operations[i] == "getNewsFeed") {
-            result.push_back(twitter->getNewsFeed(inputs[i][0]));
+            // Obtener el feed de noticias de un usuario
+            result.push_back(twitter->getNewsFeed(inputs[i][0])); // Agregar el resultado del feed
         } else if (operations[i] == "follow") {
+            // Hacer que un usuario siga a otro
             twitter->follow(inputs[i][0], inputs[i][1]);
-            result.push_back({});
+            result.push_back({}); // No hay salida para esta operación, se agrega un vector vacío
         } else if (operations[i] == "unfollow") {
+            // Hacer que un usuario deje de seguir a otro
             twitter->unfollow(inputs[i][0], inputs[i][1]);
-            result.push_back({});
+            result.push_back({}); // No hay salida para esta operación, se agrega un vector vacío
         }
     }
     
     // Imprimir los resultados en el formato esperado
     for (auto& res : result) {
         if (res.empty()) {
-            cout << "null";
+            cout << "null"; // Si el resultado está vacío, imprimimos "null"
         } else {
             cout << "[";
             for (int i = 0; i < res.size(); ++i) {
-                cout << res[i];
-                if (i < res.size() - 1) cout << ",";
+                cout << res[i]; // Imprimir cada ID de tweet
+                if (i < res.size() - 1) cout << ","; // Agregar una coma si no es el último elemento
             }
             cout << "]";
         }
-        cout << endl;
+        cout << endl; // Salto de línea después de cada resultado
     }
 
-    return 0;
+    return 0; // Fin del programa
 }
