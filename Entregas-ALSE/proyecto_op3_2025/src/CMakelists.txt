@@ -1,0 +1,20 @@
+file(GLOB_RECURSE SRC_CORE        core/*.cpp)
+file(GLOB_RECURSE SRC_PERSISTENCE persistence/*.cpp)
+file(GLOB_RECURSE SRC_GUI         gui/*.cpp)
+
+add_executable(inventory-manager
+    main.cpp
+    ${SRC_CORE}
+    ${SRC_PERSISTENCE}
+    ${SRC_GUI}
+)
+
+target_include_directories(inventory-manager PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/core
+    ${CMAKE_CURRENT_SOURCE_DIR}/persistence
+    ${CMAKE_CURRENT_SOURCE_DIR}/gui
+)
+
+target_link_libraries(inventory-manager
+    Qt5::Widgets Qt5::Sql Qt5::PrintSupport
+)
