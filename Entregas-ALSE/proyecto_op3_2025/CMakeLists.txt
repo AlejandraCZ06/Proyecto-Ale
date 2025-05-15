@@ -8,6 +8,4 @@ set(CMAKE_AUTOUIC ON)
 
 find_package(Qt5 5.15 REQUIRED COMPONENTS Widgets Sql PrintSupport)
 
-add_subdirectory(src)
 enable_testing()
-add_subdirectory(tests)
