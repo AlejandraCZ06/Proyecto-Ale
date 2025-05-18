@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>814</width>
+    <height>525</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,11 +17,24 @@
    <widget class="QTableWidget" name="tableWidget">
     <property name="geometry">
      <rect>
-      <x>5</x>
-      <y>-9</y>
-      <width>651</width>
-      <height>361</height>
+      <x>80</x>
+      <y>100</y>
+      <width>611</width>
+      <height>301</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QScrollBar" name="verticalScrollBar">
+    <property name="geometry">
+     <rect>
+      <x>690</x>
+      <y>99</y>
+      <width>16</width>
+      <height>301</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
     </property>
    </widget>
   </widget>
@@ -30,7 +43,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>814</width>
      <height>19</height>
     </rect>
    </property>
@@ -39,6 +52,12 @@
      <string>inventario</string>
     </property>
    </widget>
+   <widget class="QMenu" name="menuNuevo_item">
+    <property name="title">
+     <string>Nuevo item</string>
+    </property>
+   </widget>
+   <addaction name="menuNuevo_item"/>
    <addaction name="menuinventario"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
