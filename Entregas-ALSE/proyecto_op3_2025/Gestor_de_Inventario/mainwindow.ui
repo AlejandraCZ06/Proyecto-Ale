@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">font: 700 italic 9pt &quot;Nimbus Sans [URW ]&quot;;</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTableWidget" name="tableWidget">
     <property name="geometry">
@@ -44,7 +47,7 @@
      <x>0</x>
      <y>0</y>
      <width>814</width>
-     <height>19</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuinventario">
@@ -56,6 +59,7 @@
     <property name="title">
      <string>Nuevo item</string>
     </property>
+    <addaction name="separator"/>
    </widget>
    <addaction name="menuNuevo_item"/>
    <addaction name="menuinventario"/>
