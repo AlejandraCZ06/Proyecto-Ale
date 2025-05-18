@@ -11,18 +11,32 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
+find_package(Qt5 COMPONENTS Widgets Sql REQUIRED)
 
 set(PROJECT_SOURCES
         main.cpp
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+        component.h
+        component.cpp
+        databasemanager.h
+        databasemanager.cpp
+        inventorymanager.h
+        inventorymanager.cpp
+        reportgenerator.h
+        reportgenerator.cpp
+)
+set(SQL_FILES
+    db/inventario.sql
+    db/inventario.db
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(Gestor_de_Inventario
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        ${SQL_FILES}
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Gestor_de_Inventario APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
@@ -38,11 +52,12 @@ else()
     else()
         add_executable(Gestor_de_Inventario
             ${PROJECT_SOURCES}
+            ${SQL_FILES}
         )
     endif()
 endif()
 
-target_link_libraries(Gestor_de_Inventario PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(Gestor_de_Inventario PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt5::Sql)
 
 set_target_properties(Gestor_de_Inventario PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com

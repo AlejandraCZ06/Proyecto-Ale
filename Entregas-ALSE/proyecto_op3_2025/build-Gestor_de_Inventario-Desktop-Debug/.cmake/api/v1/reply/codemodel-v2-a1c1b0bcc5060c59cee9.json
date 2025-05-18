@@ -1,0 +1,70 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-ee76a31ccf7ee96dd983.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Gestor_de_Inventario",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Gestor_de_Inventario::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Gestor_de_Inventario-Debug-9ecc5bf17662ba5322c2.json",
+					"name" : "Gestor_de_Inventario",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Gestor_de_Inventario_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Gestor_de_Inventario_autogen-Debug-406d08da96ca8e9b693b.json",
+					"name" : "Gestor_de_Inventario_autogen",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/yo/ALSE/Projecto-Ale/Entregas-ALSE/proyecto_op3_2025/build-Gestor_de_Inventario-Desktop-Debug",
+		"source" : "/home/yo/ALSE/Projecto-Ale/Entregas-ALSE/proyecto_op3_2025/Gestor_de_Inventario"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}

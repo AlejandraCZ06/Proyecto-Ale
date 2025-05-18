@@ -1,11 +1,44 @@
-#include "mainwindow.h"
-
 #include <QApplication>
+#include <QCoreApplication>
+#include <QDir>
+#include <QDebug>
+#include "mainwindow.h"
+#include "databasemanager.h"
+#include "inventorymanager.h"
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    MainWindow w;
+    QApplication app(argc, argv);
+
+    // Genera una ruta robusta para la base de datos relativa al ejecutable
+    QString dbFolder = QCoreApplication::applicationDirPath() + "/db";
+    QString dbPath = dbFolder + "/inventario.db";
+
+    // Asegura que el directorio de la base de datos existe
+    if (!QDir().exists(dbFolder)) {
+        QDir().mkpath(dbFolder);
+        qDebug() << "Directorio 'db' creado en:" << dbFolder;
+    } else {
+        qDebug() << "Directorio 'db' ya existe en:" << dbFolder;
+    }
+    qDebug() << "Base de datos esperada en:" << dbPath;
+
+    // Inicializa la conexión a la base de datos
+    DatabaseManager dbManager(dbPath);
+    if (!dbManager.open()) {
+        qCritical("No se pudo abrir la base de datos en %s. Terminando.", qPrintable(dbPath));
+        return 1;
+    }
+    qDebug() << "Base de datos abierta correctamente.";
+
+    // Crea el gestor de inventario y la ventana principal
+    InventoryManager inventoryManager(&dbManager);
+    MainWindow w(&inventoryManager, &dbManager); // Si tus constructores lo requieren
     w.show();
-    return a.exec();
+
+    int resultado = app.exec();
+
+    dbManager.close();
+
+    return resultado;
 }

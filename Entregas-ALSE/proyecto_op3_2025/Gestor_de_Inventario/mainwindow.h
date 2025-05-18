@@ -2,20 +2,27 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "inventorymanager.h"
+#include "databasemanager.h"
 
-QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
-QT_END_NAMESPACE
+namespace Ui {
+class MainWindow;
+}
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(InventoryManager *inventory, DatabaseManager *db, QWidget *parent = nullptr);
     ~MainWindow();
 
 private:
     Ui::MainWindow *ui;
+    InventoryManager *m_inventory;
+    DatabaseManager *m_db;
+
+    void updateComponentTable();
 };
+
 #endif // MAINWINDOW_H
