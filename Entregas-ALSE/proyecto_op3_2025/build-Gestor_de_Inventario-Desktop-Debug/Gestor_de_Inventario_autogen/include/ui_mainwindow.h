@@ -39,6 +39,7 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
         MainWindow->resize(814, 525);
+        MainWindow->setStyleSheet(QString::fromUtf8("font: 700 italic 9pt \"Nimbus Sans [URW ]\";"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         tableWidget = new QTableWidget(centralwidget);
@@ -51,7 +52,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 814, 19));
+        menubar->setGeometry(QRect(0, 0, 814, 22));
         menuinventario = new QMenu(menubar);
         menuinventario->setObjectName(QString::fromUtf8("menuinventario"));
         menuNuevo_item = new QMenu(menubar);
@@ -63,6 +64,7 @@ public:
 
         menubar->addAction(menuNuevo_item->menuAction());
         menubar->addAction(menuinventario->menuAction());
+        menuNuevo_item->addSeparator();
 
         retranslateUi(MainWindow);
 
