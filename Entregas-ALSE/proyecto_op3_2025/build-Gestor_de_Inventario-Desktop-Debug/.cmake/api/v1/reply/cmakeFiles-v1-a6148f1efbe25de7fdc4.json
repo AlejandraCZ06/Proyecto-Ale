@@ -283,6 +283,9 @@
 		{
 			"isExternal" : true,
 			"path" : "/usr/lib/x86_64-linux-gnu/cmake/Qt5Sql/Qt5SqlConfig.cmake"
+		},
+		{
+			"path" : "db/inventario.sql"
 		}
 	],
 	"kind" : "cmakeFiles",

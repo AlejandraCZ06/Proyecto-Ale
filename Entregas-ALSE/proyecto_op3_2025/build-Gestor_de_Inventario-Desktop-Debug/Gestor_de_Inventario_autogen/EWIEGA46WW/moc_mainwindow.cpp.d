@@ -1,6 +1,5 @@
 /home/yo/ALSE/Projecto-Ale/Entregas-ALSE/proyecto_op3_2025/build-Gestor_de_Inventario-Desktop-Debug/Gestor_de_Inventario_autogen/EWIEGA46WW/moc_mainwindow.cpp: /home/yo/ALSE/Projecto-Ale/Entregas-ALSE/proyecto_op3_2025/Gestor_de_Inventario/mainwindow.h \
   /home/yo/ALSE/Projecto-Ale/Entregas-ALSE/proyecto_op3_2025/build-Gestor_de_Inventario-Desktop-Debug/Gestor_de_Inventario_autogen/moc_predefs.h \
-  /home/yo/ALSE/Projecto-Ale/Entregas-ALSE/proyecto_op3_2025/Gestor_de_Inventario/Component.h \
   /home/yo/ALSE/Projecto-Ale/Entregas-ALSE/proyecto_op3_2025/Gestor_de_Inventario/component.h \
   /home/yo/ALSE/Projecto-Ale/Entregas-ALSE/proyecto_op3_2025/Gestor_de_Inventario/databasemanager.h \
   /home/yo/ALSE/Projecto-Ale/Entregas-ALSE/proyecto_op3_2025/Gestor_de_Inventario/inventorymanager.h \

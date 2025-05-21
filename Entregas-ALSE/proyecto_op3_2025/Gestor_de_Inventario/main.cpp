@@ -10,9 +10,10 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    // Genera una ruta robusta para la base de datos relativa al ejecutable
-    QString dbFolder = QCoreApplication::applicationDirPath() + "/db";
-    QString dbPath = dbFolder + "/inventario.db";
+    // Carpeta de base y archivo SQL relativos al ejecutable
+    QString dbFolder    = QCoreApplication::applicationDirPath() + "/db";
+    QString dbPath      = dbFolder + "/inventario.db";
+    QString sqlInitPath = dbFolder + "/inventario.sql";
 
     // Asegura que el directorio de la base de datos existe
     if (!QDir().exists(dbFolder)) {
@@ -23,8 +24,8 @@ int main(int argc, char *argv[])
     }
     qDebug() << "Base de datos esperada en:" << dbPath;
 
-    // Inicializa la conexión a la base de datos
-    DatabaseManager dbManager(dbPath);
+    // Inicializa la conexión a la base de datos, pasando la ruta al archivo SQL
+    DatabaseManager dbManager(dbPath, sqlInitPath);
     if (!dbManager.open()) {
         qCritical("No se pudo abrir la base de datos en %s. Terminando.", qPrintable(dbPath));
         return 1;
@@ -33,7 +34,7 @@ int main(int argc, char *argv[])
 
     // Crea el gestor de inventario y la ventana principal
     InventoryManager inventoryManager(&dbManager);
-    MainWindow w(&inventoryManager, &dbManager); // Si tus constructores lo requieren
+    MainWindow w(&inventoryManager, &dbManager);
     w.show();
 
     int resultado = app.exec();

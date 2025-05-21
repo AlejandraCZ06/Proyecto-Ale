@@ -4,12 +4,13 @@
 #include <QString>
 #include <QSqlDatabase>
 #include <QList>
-#include "Component.h"
+#include "component.h"
 
 class DatabaseManager
 {
 public:
-    DatabaseManager(const QString& dbPath);
+    // Ahora puedes pasar opcionalmente la ruta SQL al constructor
+    DatabaseManager(const QString& dbPath, const QString& sqlInitPath = "db/inventario.sql");
     ~DatabaseManager();
 
     bool open();
@@ -22,8 +23,12 @@ public:
 
 private:
     QString m_dbPath;
-    QSqlDatabase m_db;
+    QString m_sqlInitPath;
     QString m_connectionName;
+    QSqlDatabase m_db;
+
+    // Nueva función privada para auto-inicialización
+    void initIfNeeded();
 };
 
 #endif // DATABASEMANAGER_H

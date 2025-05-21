@@ -5,9 +5,13 @@
 #include <QDir>
 #include <QFileInfo>
 #include <QDebug>
+#include <QFile>
+#include <QTextStream>
 
-DatabaseManager::DatabaseManager(const QString& dbPath)
+// Constructor (ahora acepta la ruta SQL de inicialización)
+DatabaseManager::DatabaseManager(const QString& dbPath, const QString& sqlInitPath)
     : m_dbPath(dbPath),
+      m_sqlInitPath(sqlInitPath),
       m_connectionName("main_inventory_connection")
 {
     // Asegura que exista la carpeta donde estará la base de datos
@@ -19,6 +23,37 @@ DatabaseManager::~DatabaseManager() {
     close();
     if(QSqlDatabase::contains(m_connectionName))
         QSqlDatabase::removeDatabase(m_connectionName);
+}
+
+// Inicialización automática si falta la tabla components
+void DatabaseManager::initIfNeeded()
+{
+    QSqlQuery query(m_db);
+    // Comprueba si la tabla "components" existe
+    query.exec("SELECT name FROM sqlite_master WHERE type='table' AND name='components';");
+    if (!query.next()) {
+        QFile sqlFile(m_sqlInitPath);
+        if (sqlFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            QTextStream in(&sqlFile);
+            QString sql = in.readAll();
+            // Ejecuta cada sentencia separada por ;
+            for (const QString& statement : sql.split(';', Qt::SkipEmptyParts)) {
+                QString stmt = statement.trimmed();
+                if (!stmt.isEmpty()) {
+                    if (!query.exec(stmt)) {
+                        qDebug() << "Error ejecutando:" << stmt;
+                        qDebug() << "Error:" << query.lastError().text();
+                    }
+                }
+            }
+            sqlFile.close();
+            qDebug() << "Base de datos inicializada automáticamente desde" << m_sqlInitPath;
+        } else {
+            qDebug() << "No se pudo abrir el archivo SQL:" << m_sqlInitPath;
+        }
+    } else {
+        qDebug() << "La tabla components ya existe; no es necesario inicializar.";
+    }
 }
 
 bool DatabaseManager::open() {
@@ -38,6 +73,10 @@ bool DatabaseManager::open() {
         return false;
     }
     qDebug() << "Base de datos ABRIENDOSE correctamente.";
+
+    // Inicializa la base de datos solo si hace falta
+    initIfNeeded();
+
     return true;
 }
 

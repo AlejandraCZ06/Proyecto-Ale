@@ -27,6 +27,9 @@ set(PROJECT_SOURCES
         reportgenerator.h
         reportgenerator.cpp
 )
+configure_file(${CMAKE_SOURCE_DIR}/db/inventario.sql
+               ${CMAKE_BINARY_DIR}/db/inventario.sql COPYONLY)
+
 set(SQL_FILES
     db/inventario.sql
     db/inventario.db
