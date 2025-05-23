@@ -6,14 +6,15 @@
 #include <QList>
 #include <QString>
 
+// Clase de alto nivel para la lógica de inventario (interactúa con DatabaseManager)
 class InventoryManager
 {
 public:
-    /// Crea un gestor partiendo de un DatabaseManager ya creado.
-    InventoryManager(DatabaseManager* dbManager);
+    /// Constructor. Recibe un DatabaseManager ya inicializado.
+    explicit InventoryManager(DatabaseManager* dbManager);
 
     /// Recupera la lista de todos los componentes.
-    QList<Component> getComponents();
+    QList<Component> getComponents() const;
 
     /// Agrega un nuevo componente. Devuelve true si tuvo éxito.
     bool addComponent(const Component& component);
@@ -24,13 +25,14 @@ public:
     /// Elimina un componente por su ID. Devuelve true si tuvo éxito.
     bool removeComponent(int componentId);
 
-    /// Devuelve una lista filtrada según patrón de nombre o tipo (búsqueda insensible a mayúsculas/minúsculas).
+    /// Devuelve una lista filtrada por nombre o tipo, búsqueda insensible a mayúsculas/minúsculas.
     QList<Component> filterComponents(const QString &pattern) const;
 
-    QList<Component> lowStockComponents() const;
+    /// Devuelve componentes con stock bajo (usa un umbral predefinido, por ejemplo: "5" piezas).
+    QList<Component> lowStockComponents(int lowStockThreshold = 5) const;
 
 private:
-    DatabaseManager* m_dbManager;
+    DatabaseManager* m_dbManager; // No propietario, asume que la vida útil la gestiona el llamador.
 };
 
 #endif // INVENTORYMANAGER_H
