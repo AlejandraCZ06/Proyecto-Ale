@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Gestor de Inventario
+Exec=Gestor_de_Inventario
+Icon=icono_inventario
+Categories=Utility;
