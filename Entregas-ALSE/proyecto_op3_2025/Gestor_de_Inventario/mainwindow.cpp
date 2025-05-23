@@ -11,6 +11,71 @@ MainWindow::MainWindow(InventoryManager *inventory, DatabaseManager *db, QWidget
     : QMainWindow(parent), ui(new Ui::MainWindow), m_inventory(inventory), m_db(db)
 {
     ui->setupUi(this);
+    // Degradado en fondo y widgets principales
+    QString qss = R"(
+    QWidget {
+        background: qlineargradient(
+            spread:pad, x1:0, y1:0, x2:1, y2:1,
+            stop:0 #e3f0ff, stop:1 #3984e8
+        );
+        color: #1a2340;
+    }
+
+    /* Tablas con fondo blanco/transparente y bordes */
+    QTableWidget, QTableView {
+        background: rgba(255,255,255,0.7);
+        alternate-background-color: #b3d1ff;
+        border: 1px solid #26577c;
+        selection-background-color: #7ca7e7;
+    }
+
+    /* Celda de cantidad baja personalizada */
+    QTableWidget::item {
+        selection-background-color: #2257a7;
+    }
+
+    QHeaderView::section {
+        background: #2661b8;
+        color: white;
+        font-weight: bold;
+        border: 1px solid #8cb3d9;
+    }
+
+    QLabel {
+        color: #1a2340;
+        font-weight: bold;
+    }
+
+    QPushButton {
+        background: qlineargradient(
+            spread:pad, x1:0, y1:0, x2:1, y2:1,
+            stop:0 #a0c1f7, stop:1 #185a9d
+        );
+        color: white;
+        border-radius: 6px;
+        border: 1px solid #2661b8;
+        padding: 4px 10px;
+        font-weight: bold;
+    }
+
+    QPushButton:hover {
+        background: #0d305d;
+    }
+
+    QLineEdit, QSpinBox, QDoubleSpinBox, QDateEdit, QPlainTextEdit {
+        background: #f0f7ff;
+        border: 1px solid #7ca7e7;
+        color: #253860;
+        border-radius: 4px;
+    }
+
+    QStatusBar, QGroupBox {
+        background: transparent;
+    }
+    )";
+
+    // Aplica el stylesheet global
+    qApp->setStyleSheet(qss);
 
     // Configuración visual y lógica
     ui->tableWidget->setColumnCount(8);
@@ -37,24 +102,20 @@ void MainWindow::on_tableWidget_itemSelectionChanged()
 void MainWindow::updateComponentTable(const QString &filterText)
 {
     QList<Component> componentes;
-
-    // Si hay filtro, directamente usa la función de InventoryManager (más eficiente)
     if (!filterText.isEmpty()) {
         componentes = m_inventory->filterComponents(filterText);
     } else {
         componentes = m_inventory->getComponents();
     }
 
-    // Limpia tabla y ajusta filas
     ui->tableWidget->clearContents();
     ui->tableWidget->setRowCount(componentes.size());
-
-    // SOLO ES NECESARIO ASIGNAR HEADERS UNA SOLA VEZ, usualmente en el constructor
-    // Dejarlo aquí solo si se borra accidentalmente en clearContents y tu UI lo requiere.
     QStringList headers = {"ID", "Nombre", "Tipo", "Cantidad", "Ubicación", "Fecha", "Lote", "Notas"};
     ui->tableWidget->setHorizontalHeaderLabels(headers);
 
-    // Rellenar la tabla con los datos
+    // ---- AGREGA o MODIFICA este bloque: ----
+    const int lowStockThreshold = 3; // umbral configurable
+
     for (int row = 0; row < componentes.size(); ++row) {
         const Component& c = componentes[row];
         ui->tableWidget->setItem(row, 0, new QTableWidgetItem(QString::number(c.getId())));
@@ -65,8 +126,17 @@ void MainWindow::updateComponentTable(const QString &filterText)
         ui->tableWidget->setItem(row, 5, new QTableWidgetItem(c.getPurchaseDate()));
         ui->tableWidget->setItem(row, 6, new QTableWidgetItem(QString::number(c.getLote())));
         ui->tableWidget->setItem(row, 7, new QTableWidgetItem(c.getNotes()));
+
+        // ---- Resalta la celda de cantidad si está por debajo del umbral ----
+        auto cantidadItem = ui->tableWidget->item(row, 3);
+        if (cantidadItem && c.getQuantity() < lowStockThreshold) {
+            cantidadItem->setBackground(Qt::red);
+            cantidadItem->setForeground(Qt::white);
+        } else if (cantidadItem) {
+            cantidadItem->setBackground(Qt::white);
+            cantidadItem->setForeground(Qt::black);
+        }
     }
-    // Mejor UX: autoajusta el ancho de columnas
     ui->tableWidget->resizeColumnsToContents();
 }
 // ========================== LIMPIAR FORMULARIO ==========================
