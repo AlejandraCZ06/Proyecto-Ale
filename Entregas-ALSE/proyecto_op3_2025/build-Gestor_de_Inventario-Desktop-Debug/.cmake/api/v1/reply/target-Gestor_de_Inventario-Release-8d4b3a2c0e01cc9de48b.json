@@ -86,7 +86,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-DQT_QML_DEBUG -g"
+					"fragment" : "-DQT_QML_DEBUG -O3 -DNDEBUG"
 				},
 				{
 					"backtrace" : 3,
@@ -105,6 +105,10 @@
 				{
 					"backtrace" : 3,
 					"define" : "QT_GUI_LIB"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "QT_NO_DEBUG"
 				},
 				{
 					"backtrace" : 3,
@@ -200,7 +204,7 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "-DQT_QML_DEBUG -g",
+				"fragment" : "-DQT_QML_DEBUG -O3 -DNDEBUG",
 				"role" : "flags"
 			},
 			{

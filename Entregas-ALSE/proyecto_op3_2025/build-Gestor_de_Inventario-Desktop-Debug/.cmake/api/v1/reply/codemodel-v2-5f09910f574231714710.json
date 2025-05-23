@@ -7,7 +7,7 @@
 				{
 					"build" : ".",
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-.-Debug-0976bab050e2fcda0716.json",
+					"jsonFile" : "directory-.-Release-0976bab050e2fcda0716.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.5"
@@ -21,7 +21,7 @@
 					]
 				}
 			],
-			"name" : "Debug",
+			"name" : "Release",
 			"projects" : 
 			[
 				{
@@ -42,14 +42,14 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "Gestor_de_Inventario::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Gestor_de_Inventario-Debug-b75caac7055e0020528b.json",
+					"jsonFile" : "target-Gestor_de_Inventario-Release-8d4b3a2c0e01cc9de48b.json",
 					"name" : "Gestor_de_Inventario",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "Gestor_de_Inventario_autogen::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Gestor_de_Inventario_autogen-Debug-406d08da96ca8e9b693b.json",
+					"jsonFile" : "target-Gestor_de_Inventario_autogen-Release-406d08da96ca8e9b693b.json",
 					"name" : "Gestor_de_Inventario_autogen",
 					"projectIndex" : 0
 				}
