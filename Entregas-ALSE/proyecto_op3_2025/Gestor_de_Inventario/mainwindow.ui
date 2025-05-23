@@ -22,22 +22,9 @@
      <rect>
       <x>30</x>
       <y>50</y>
-      <width>681</width>
+      <width>691</width>
       <height>361</height>
      </rect>
-    </property>
-   </widget>
-   <widget class="QScrollBar" name="vertical">
-    <property name="geometry">
-     <rect>
-      <x>710</x>
-      <y>50</y>
-      <width>16</width>
-      <height>361</height>
-     </rect>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Vertical</enum>
     </property>
    </widget>
    <widget class="QGroupBox" name="groupBox">
@@ -50,7 +37,7 @@
      </rect>
     </property>
     <property name="title">
-     <string> </string>
+     <string/>
     </property>
     <widget class="QLineEdit" name="nombre_2">
      <property name="geometry">
@@ -300,19 +287,6 @@
     </property>
     <property name="text">
      <string>Exportar CSV</string>
-    </property>
-   </widget>
-   <widget class="QScrollBar" name="horizontal">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>410</y>
-      <width>671</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
     </property>
    </widget>
   </widget>

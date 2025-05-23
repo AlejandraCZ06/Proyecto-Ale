@@ -11,7 +11,7 @@ class DatabaseManager
 {
 public:
     // Constructor. Permite establecer la ruta del archivo SQLite y el script SQL de inicialización.
-    explicit DatabaseManager(const QString& dbPath = "db/inventario1.db", const QString& sqlInitPath = "db/inventario.sql");
+    explicit DatabaseManager(const QString& dbPath = "db/inventario.db", const QString& sqlInitPath = "db/inventario.sql");
     ~DatabaseManager();
 
     // Conexión y cierre

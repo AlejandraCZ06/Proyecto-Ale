@@ -20,7 +20,6 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QScrollBar>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QWidget>
@@ -32,7 +31,6 @@ class Ui_MainWindow
 public:
     QWidget *centralwidget;
     QTableWidget *tableWidget;
-    QScrollBar *vertical;
     QGroupBox *groupBox;
     QLineEdit *nombre_2;
     QDoubleSpinBox *cantidad;
@@ -55,7 +53,6 @@ public:
     QLineEdit *buscar_2;
     QLabel *buscar;
     QPushButton *exportar;
-    QScrollBar *horizontal;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -68,11 +65,7 @@ public:
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         tableWidget = new QTableWidget(centralwidget);
         tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
-        tableWidget->setGeometry(QRect(30, 50, 681, 361));
-        vertical = new QScrollBar(centralwidget);
-        vertical->setObjectName(QString::fromUtf8("vertical"));
-        vertical->setGeometry(QRect(710, 50, 16, 361));
-        vertical->setOrientation(Qt::Vertical);
+        tableWidget->setGeometry(QRect(30, 50, 691, 361));
         groupBox = new QGroupBox(centralwidget);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
         groupBox->setGeometry(QRect(30, 430, 691, 141));
@@ -139,10 +132,6 @@ public:
         exportar = new QPushButton(centralwidget);
         exportar->setObjectName(QString::fromUtf8("exportar"));
         exportar->setGeometry(QRect(559, 10, 91, 22));
-        horizontal = new QScrollBar(centralwidget);
-        horizontal->setObjectName(QString::fromUtf8("horizontal"));
-        horizontal->setGeometry(QRect(40, 410, 671, 16));
-        horizontal->setOrientation(Qt::Horizontal);
         MainWindow->setCentralWidget(centralwidget);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
