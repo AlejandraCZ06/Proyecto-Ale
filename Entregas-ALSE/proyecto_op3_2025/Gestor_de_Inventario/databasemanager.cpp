@@ -83,7 +83,7 @@ void DatabaseManager::close() {
 QList<Component> DatabaseManager::getAllComponents() {
     QList<Component> list;
     QSqlQuery query(m_db);
-    if (query.exec("SELECT id, name, type, quantity, location, purchase_date, min_quantity, notes FROM components")) {
+    if (query.exec("SELECT id, name, type, quantity, location, purchase_date,lote, notes FROM components")) {
         while (query.next()) {
             Component c(
                 query.value(0).toInt(),    // id
@@ -92,7 +92,7 @@ QList<Component> DatabaseManager::getAllComponents() {
                 query.value(3).toInt(),    // quantity
                 query.value(4).toString(), // location
                 query.value(5).toString(), // purchase_date
-                query.value(6).toInt(),    // min_quantity
+                query.value(6).toInt(),    // lote
                 query.value(7).toString()  // notas
             );
             list.append(c);

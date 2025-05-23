@@ -171,7 +171,7 @@ void MainWindow::on_buscar_2_textChanged(const QString &text)
 
     // Muestra la tabla sólo con los componentes filtrados
     ui->tableWidget->setRowCount(filtrados.size());
-    ui->tableWidget->setColumnCount(8); // O 8, según las columnas visibles
+    ui->tableWidget->setColumnCount(6); // O 8, según las columnas visibles
 
     // Rellena la fila con los datos filtrados:
     int row = 0;

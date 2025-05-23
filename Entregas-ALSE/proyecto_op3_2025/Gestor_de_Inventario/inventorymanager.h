@@ -27,7 +27,6 @@ public:
     /// Devuelve una lista filtrada según patrón de nombre o tipo (búsqueda insensible a mayúsculas/minúsculas).
     QList<Component> filterComponents(const QString &pattern) const;
 
-    /// Devuelve componentes de bajo stock (vacío por ahora, se implementará cuando uses min_quantity).
     QList<Component> lowStockComponents() const;
 
 private:

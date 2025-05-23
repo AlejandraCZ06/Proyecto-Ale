@@ -18,7 +18,7 @@ bool ReportGenerator::exportToCSV(const QList<Component>& components, const QStr
             << c.getQuantity() << ","
             << "\"" << c.getLocation() << "\","
             << "\"" << c.getPurchaseDate() << "\","
-            //<< c.geLote() << ","
+            << c.geLote() << ","
             << "\"" << c.getNotes().replace('"', '\'') << "\""
             << "\n";
     }

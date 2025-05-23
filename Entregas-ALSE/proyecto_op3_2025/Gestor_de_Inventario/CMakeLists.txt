@@ -32,7 +32,6 @@ configure_file(${CMAKE_SOURCE_DIR}/db/inventario.sql
 
 set(SQL_FILES
     db/inventario.sql
-    db/inventario.db
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
