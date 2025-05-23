@@ -3,23 +3,28 @@
 InventoryManager::InventoryManager(DatabaseManager* dbManager)
     : m_dbManager(dbManager) {}
 
-QList<Component> InventoryManager::getComponents() {
+QList<Component> InventoryManager::getComponents()
+{
     return m_dbManager->getAllComponents();
 }
 
-void InventoryManager::addComponent(const Component& component) {
-    m_dbManager->addComponent(component);
+bool InventoryManager::addComponent(const Component& component)
+{
+    return m_dbManager->addComponent(component);
 }
 
-void InventoryManager::updateComponent(const Component& component) {
-    m_dbManager->updateComponent(component);
+bool InventoryManager::updateComponent(const Component& component)
+{
+    return m_dbManager->updateComponent(component);
 }
 
-void InventoryManager::removeComponent(int componentId) {
-    m_dbManager->deleteComponent(componentId);
+bool InventoryManager::removeComponent(int componentId)
+{
+    return m_dbManager->deleteComponent(componentId);
 }
 
-QList<Component> InventoryManager::filterComponents(const QString &pattern) const {
+QList<Component> InventoryManager::filterComponents(const QString &pattern) const
+{
     QList<Component> result;
     QList<Component> all = m_dbManager->getAllComponents();
     for (const auto& comp : all) {
@@ -32,13 +37,16 @@ QList<Component> InventoryManager::filterComponents(const QString &pattern) cons
     return result;
 }
 
-QList<Component> InventoryManager::lowStockComponents() const {
+QList<Component> InventoryManager::lowStockComponents() const
+{
     QList<Component> result;
+
     QList<Component> all = m_dbManager->getAllComponents();
     for (const auto& comp : all) {
-        if (comp.getQuantity() <= comp.getMinQuantity()) {
+        if (comp.getQuantity() <= comp.getLote()) {
             result.append(comp);
         }
     }
+
     return result;
 }

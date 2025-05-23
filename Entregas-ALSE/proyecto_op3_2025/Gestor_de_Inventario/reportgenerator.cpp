@@ -10,7 +10,7 @@ bool ReportGenerator::exportToCSV(const QList<Component>& components, const QStr
 
     QTextStream out(&file);
     // Escribimos encabezados
-    out << "id,name,type,quantity,location,purchase_date,min_quantity,notes\n";
+    out << "id,name,type,quantity,location,purchase_date,lote,notes\n";
     for (const auto &c : components) {
         out << c.getId() << ","
             << "\"" << c.getName() << "\","
@@ -18,7 +18,7 @@ bool ReportGenerator::exportToCSV(const QList<Component>& components, const QStr
             << c.getQuantity() << ","
             << "\"" << c.getLocation() << "\","
             << "\"" << c.getPurchaseDate() << "\","
-            << c.getMinQuantity() << ","
+            //<< c.geLote() << ","
             << "\"" << c.getNotes().replace('"', '\'') << "\""
             << "\n";
     }

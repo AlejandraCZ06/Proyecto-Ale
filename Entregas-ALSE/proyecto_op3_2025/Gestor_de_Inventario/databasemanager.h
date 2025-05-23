@@ -10,7 +10,7 @@ class DatabaseManager
 {
 public:
     // Ahora puedes pasar opcionalmente la ruta SQL al constructor
-    DatabaseManager(const QString& dbPath, const QString& sqlInitPath = "db/inventario.sql");
+    DatabaseManager(const QString& dbPath = "db/inventario.db", const QString& sqlInitPath = "db/inventario.sql");
     ~DatabaseManager();
 
     bool open();

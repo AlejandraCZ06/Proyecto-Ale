@@ -1,42 +1,40 @@
 #include "databasemanager.h"
+#include "component.h"
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QVariant>
-#include <QDir>
-#include <QFileInfo>
 #include <QDebug>
+#include <QFileInfo>
+#include <QDir>
 #include <QFile>
 #include <QTextStream>
 
-// Constructor (ahora acepta la ruta SQL de inicialización)
+// Constructor
 DatabaseManager::DatabaseManager(const QString& dbPath, const QString& sqlInitPath)
-    : m_dbPath(dbPath),
-      m_sqlInitPath(sqlInitPath),
-      m_connectionName("main_inventory_connection")
+    : m_dbPath(dbPath), m_sqlInitPath(sqlInitPath), m_connectionName("main_inventory_connection")
 {
     // Asegura que exista la carpeta donde estará la base de datos
     QFileInfo dbFileInfo(m_dbPath);
     QDir().mkpath(dbFileInfo.path());
 }
 
+// Destructor
 DatabaseManager::~DatabaseManager() {
     close();
-    if(QSqlDatabase::contains(m_connectionName))
+    if (QSqlDatabase::contains(m_connectionName))
         QSqlDatabase::removeDatabase(m_connectionName);
 }
 
-// Inicialización automática si falta la tabla components
+// Inicializa la base de datos si es necesario
 void DatabaseManager::initIfNeeded()
 {
     QSqlQuery query(m_db);
-    // Comprueba si la tabla "components" existe
     query.exec("SELECT name FROM sqlite_master WHERE type='table' AND name='components';");
     if (!query.next()) {
         QFile sqlFile(m_sqlInitPath);
         if (sqlFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
             QTextStream in(&sqlFile);
             QString sql = in.readAll();
-            // Ejecuta cada sentencia separada por ;
             for (const QString& statement : sql.split(';', Qt::SkipEmptyParts)) {
                 QString stmt = statement.trimmed();
                 if (!stmt.isEmpty()) {
@@ -60,7 +58,7 @@ bool DatabaseManager::open() {
     qDebug() << "[DatabaseManager] Drivers disponibles:" << QSqlDatabase::drivers();
     qDebug() << "[DatabaseManager] Intentando abrir base de datos en:" << m_dbPath;
 
-    if(QSqlDatabase::contains(m_connectionName))
+    if (QSqlDatabase::contains(m_connectionName))
         m_db = QSqlDatabase::database(m_connectionName);
     else
         m_db = QSqlDatabase::addDatabase("QSQLITE", m_connectionName);
@@ -73,10 +71,7 @@ bool DatabaseManager::open() {
         return false;
     }
     qDebug() << "Base de datos ABRIENDOSE correctamente.";
-
-    // Inicializa la base de datos solo si hace falta
     initIfNeeded();
-
     return true;
 }
 
@@ -98,7 +93,7 @@ QList<Component> DatabaseManager::getAllComponents() {
                 query.value(4).toString(), // location
                 query.value(5).toString(), // purchase_date
                 query.value(6).toInt(),    // min_quantity
-                query.value(7).toString()  // notes
+                query.value(7).toString()  // notas
             );
             list.append(c);
         }
@@ -110,14 +105,14 @@ QList<Component> DatabaseManager::getAllComponents() {
 
 bool DatabaseManager::addComponent(const Component &component) {
     QSqlQuery query(m_db);
-    query.prepare("INSERT INTO components (name, type, quantity, location, purchase_date, min_quantity, notes) "
+    query.prepare("INSERT INTO components (name, type, quantity, location, purchase_date, lote, notes) "
                   "VALUES (?, ?, ?, ?, ?, ?, ?)");
     query.addBindValue(component.getName());
     query.addBindValue(component.getType());
     query.addBindValue(component.getQuantity());
     query.addBindValue(component.getLocation());
     query.addBindValue(component.getPurchaseDate());
-    query.addBindValue(component.getMinQuantity());
+    query.addBindValue(component.getLote());
     query.addBindValue(component.getNotes());
     if (!query.exec()) {
         qDebug() << "Error al insertar componente:" << query.lastError().text();
@@ -128,14 +123,13 @@ bool DatabaseManager::addComponent(const Component &component) {
 
 bool DatabaseManager::updateComponent(const Component &component) {
     QSqlQuery query(m_db);
-    query.prepare("UPDATE components SET name=?, type=?, quantity=?, location=?, purchase_date=?, min_quantity=?, notes=? "
-                  "WHERE id=?");
+    query.prepare("UPDATE components SET name=?, type=?, quantity=?, location=?, purchase_date=?, lote=?, notes=? WHERE id=?");
     query.addBindValue(component.getName());
     query.addBindValue(component.getType());
     query.addBindValue(component.getQuantity());
     query.addBindValue(component.getLocation());
     query.addBindValue(component.getPurchaseDate());
-    query.addBindValue(component.getMinQuantity());
+    query.addBindValue(component.getLote());
     query.addBindValue(component.getNotes());
     query.addBindValue(component.getId());
     if (!query.exec()) {
