@@ -1,0 +1,12 @@
+Package: gestor-inventario
+Version: 1.0.0
+Section: utils
+Priority: optional
+Architecture: amd64
+Depends: libc6 (>= 2.27), libqt5core5a (>= 5.12), libqt5gui5 (>= 5.12), libqt5widgets5 (>= 5.12), libqt5sql5 (>= 5.12), libqt5sql5-sqlite (>= 5.12)
+Maintainer: Tu Nombre <tu@email.com>
+Homepage: https://github.com/tu_usuario/gestor-inventario
+Description: Gestor de inventario para componentes o laboratorio con Qt y SQLite
+ Aplicación de inventario para componentes electrónicos, con interfaz gráfica Qt y almacenamiento en base de datos SQLite3.
+ Permite agregar, editar, buscar y exportar artículos a archivos CSV. Orientado a Linux y equipos de bajo consumo.
+ 
