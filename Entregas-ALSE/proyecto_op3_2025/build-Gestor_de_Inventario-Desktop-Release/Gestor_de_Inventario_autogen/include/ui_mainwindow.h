@@ -68,7 +68,7 @@ public:
         tableWidget->setGeometry(QRect(30, 50, 691, 361));
         groupBox = new QGroupBox(centralwidget);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        groupBox->setGeometry(QRect(30, 430, 691, 141));
+        groupBox->setGeometry(QRect(30, 430, 691, 152));
         nombre_2 = new QLineEdit(groupBox);
         nombre_2->setObjectName(QString::fromUtf8("nombre_2"));
         nombre_2->setGeometry(QRect(70, 20, 113, 22));
