@@ -1,12 +1,45 @@
-## Descripción del Proyecto
+# Gestor de Inventario Hogar/Lab
 
-**Gestor de Inventario para Hogar o Laboratorio** es una aplicación de escritorio desarrollada en C++ con Qt para administrar y controlar componentes electrónicos o dispositivos de bajo consumo. Permite registrar, buscar, editar, eliminar y exportar inventario de manera visual e intuitiva, con soporte para alertas de stock bajo, generación de reportes en CSV y diseño orientado a funcionar también en sistemas embebidos como Raspberry Pi.
+Aplicación **C++/Qt** para administrar componentes electrónicos. Registro, búsqueda, alertas stock bajo, reportes CSV. Funciona en PC y **Raspberry Pi**.
 
-- **Tecnologías:** Qt, C++, SQLite, AppImage
-- **Funcionalidades principales:** 
-  - Módulo de búsqueda y filtrado.
-  - Alerta automática por stock bajo.
-  - Gestión de componentes con distintos atributos.
-  - Exportación de datos a CSV.
+**Entregas-ALSE/proyecto_op3_2025**
 
-Ideal para entornos domésticos, makers, laboratorios y educación técnica.
+## ✨ Características
+- Gestión completa de inventario
+- Búsqueda y filtros rápidos
+- Alertas stock mínimo
+- Exporta CSV
+- SQLite portable
+- Multiplataforma
+
+## 🚀 Instalación
+**AppImage (Linux/RPi):**
+```bash
+chmod +x GestorInventario.AppImage
+./GestorInventario.AppImage
+```
+
+**Compilar:**
+```bash
+qmake && make
+```
+
+## 💻 Uso Rápido
+1. Agregar componentes (+)
+2. Buscar/filtrar
+3. Exportar CSV
+4. Configurar alertas
+
+## 📋 Campos
+| Campo | Ejemplo |
+|-------|---------|
+| ID | COMP001 |
+| Nombre | Resistencia 10k |
+| Stock | 245 |
+| Mínimo | 10 |
+| Ubicación | R1-C2 |
+
+## 📄 Licencia
+**MIT License** - Ver [LICENSE](LICENSE)
+
+**Hecho con Qt6 + SQLite • Para makers y labs**
